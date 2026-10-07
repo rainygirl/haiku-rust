@@ -1,5 +1,5 @@
-name rust
-version 1.90.0-2
+name rust_bin
+version 1.90.0-3
 architecture arm64
 summary "Rust compiler, Cargo and standard library for Haiku ARM64"
 description "Native Rust 1.90.0 toolchain for Haiku ARM64, including rustc, rustdoc, Cargo and the standard library. This is an experimental third-party port."
@@ -20,7 +20,7 @@ provides {
     cmd:cargo = 1.90.0
 }
 replaces {
-    rust_bin
+    rust
 }
 requires {
     haiku

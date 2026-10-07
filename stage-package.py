@@ -33,7 +33,7 @@ for name, source in (("rustc", native / "bin/rustc"), ("cargo", args.cargo), ("r
     shutil.copy2(source, args.output / "bin" / name)
 shutil.copy2(driver, args.output / "lib" / driver.name)
 shutil.copytree(standard, args.output / "lib/rustlib" / target / "lib")
-documentation = args.output / "documentation/packages/rust"
+documentation = args.output / "documentation/packages/rust_bin"
 documentation.mkdir(parents=True)
 for name in ("LICENSE-MIT", "LICENSE-APACHE", "COPYRIGHT"):
     shutil.copy2(args.source / name, documentation / name)

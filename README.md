@@ -1,7 +1,7 @@
 # Rust for Haiku / RENKU
 
 Haiku/RENKU용 비공식 Rust 패키지와 ARM64 포팅·빌드 스크립트입니다.
-현재 이 프로젝트가 직접 배포하는 패키지는 ARM64용 `rust` 1.90.0-2이며,
+현재 이 프로젝트가 직접 배포하는 패키지는 ARM64용 `rust_bin` 1.90.0-3이며,
 `rustc`, Cargo, `rustdoc`, 표준 라이브러리를 포함합니다.
 
 ## 비공식 배포 및 문의 안내
@@ -33,12 +33,12 @@ LLVM, Cargo의 의존 라이브러리, OpenSSL, zlib 등 제3자 구성 요소�
 ## 아키텍처별 설치 경로
 
 아래 상태는 2026-10-07 기준입니다. Haiku 아키텍처 이름과 Rust target 이름은
-다르므로 혼동하지 마세요. 이 저장소가 다른 아키텍처용 `rust` HPKG도 배포한다는
+다르므로 혼동하지 마세요. 이 저장소가 다른 아키텍처용 `rust_bin` HPKG도 배포한다는
 뜻은 아닙니다.
 
 | Haiku 아키텍처 | Rust target | 패키지 및 제공처 | 확인 상태 |
 | --- | --- | --- | --- |
-| `arm64` | `aarch64-unknown-haiku` | 이 프로젝트의 `rust`, pkgman.rainygirl.com | 설치·네이티브 빌드·실행 검증 완료, 실험적 포트 |
+| `arm64` | `aarch64-unknown-haiku` | 이 프로젝트의 `rust_bin`, pkgman.rainygirl.com | 설치·네이티브 빌드·실행 검증 완료, 실험적 포트 |
 | `x86_64` | `x86_64-unknown-haiku` | HaikuPorts의 `rust_bin` | upstream 레시피 확인; 이 프로젝트에서 실행 검증하지 않음 |
 | `x86_gcc2` + 보조 `x86` ABI | `i686-unknown-haiku` | HaikuPorts의 `rust_bin_x86` | 보조 아키텍처 레시피 확인; 이 프로젝트에서 실행 검증하지 않음 |
 | 순수 `x86` | `i686-unknown-haiku` | HaikuPorts 저장소에서 제공할 경우 `rust_bin` | upstream에서 `?x86`; 설치 가능 여부 미검증 |
@@ -90,15 +90,16 @@ pkgman add-repo https://pkgman.rainygirl.com/arm64
 pkgman add-repo https://pkgman.rainygirl.com/arm64-system
 pkgman add-repo https://pkgman.rainygirl.com/arm64-webpositive
 pkgman refresh
-pkgman install rust
+pkgman install rust_bin
 ```
 
 이미 같은 저장소가 HTTP로 등록되어 있으면 HTTPS 주소로 덮어쓰는 질문에
 동의하세요. 설치 변경 목록을 확인한 뒤 진행하세요. GCC, binutils, 개발 헤더,
 OpenSSL, CA 인증서 등 필요한 패키지는 의존성으로 지정되어 있습니다.
 
-정식 패키지명은 **`rust`**입니다. 이전 `rust_bin-1.90.0-1` 설치본은 자동으로
-대체되며, `rust_bin`은 기존 의존성을 위한 호환성 제공 이름으로만 남습니다.
+정식 패키지명은 **`rust_bin`**입니다. 이전 `rust-1.90.0-2` 설치본은 자동으로
+대체되며, `rust`는 기존 의존성을 위한 호환성 제공 이름으로만 남습니다.
+초기 `rust_bin-1.90.0-1` 설치본은 같은 이름의 새 리비전으로 업데이트됩니다.
 
 ```sh
 rustc -vV
@@ -111,10 +112,10 @@ rustdoc -V
 포함되어 있지 않습니다. `rustup target add`로 이 포트를 설치하는 방법도
 제공하지 않습니다.
 
-현재 HPKG: [rust-1.90.0-2-arm64.hpkg](https://pkgman.rainygirl.com/arm64/packages/rust-1.90.0-2-arm64.hpkg)
+현재 HPKG: [rust_bin-1.90.0-3-arm64.hpkg](https://pkgman.rainygirl.com/arm64/packages/rust_bin-1.90.0-3-arm64.hpkg)
 
 ```text
-SHA-256: 82e7d8cef627982a47e7f59b034b1672f5180d7fe7a86c6773a7307f6e1e0fe8
+SHA-256: ae809424af17b6358a4fc230c8f8a1f4d288b6a82dd011031cc850f7a75c4fa3
 ```
 
 ### x86_64 (64비트 Intel/AMD)
@@ -129,8 +130,8 @@ rustc -vV
 cargo -V
 ```
 
-예상 target은 `x86_64-unknown-haiku`입니다. **HaikuPorts의 패키지명은
-`rust_bin`이며 이 프로젝트의 ARM64 패키지명 `rust`와 다릅니다.**
+예상 target은 `x86_64-unknown-haiku`입니다. 패키지명은 ARM64와 같은
+`rust_bin`이지만, x86_64 패키지는 HaikuPorts에서 제공합니다.
 버전과 설치 가능 여부는 사용 중인 HaikuPorts 저장소에 따릅니다.
 
 ### x86_gcc2 / 32비트 Haiku의 보조 x86 ABI
@@ -167,7 +168,7 @@ x86 계열 안내의 근거:
 
 QEMU의 설치된 RENKU ARM64 게스트에서 다음을 검증했습니다.
 
-- HTTPS 저장소를 통한 `pkgman install rust`와 기존 `rust_bin`의 자동 대체
+- HTTPS 저장소를 통한 `pkgman install rust_bin`과 기존 `rust`의 자동 대체
 - 네이티브 Rust 컴파일·실행, 스레드·atomic·panic unwinding
 - 파일 I/O, TCP, 자식 프로세스 실행
 - procedural macro 컴파일 및 동적 로딩
@@ -205,9 +206,3 @@ bash build.sh
 Haiku용 실행 파일과 표준 라이브러리를 선택하고 Linux용 바이너리의 혼입을
 검사합니다. 전송용 tar는 BFS의 hardlink 제한 때문에 `--hard-dereference`를
 사용하며, HPKG 생성은 Haiku의 `package create`로 수행합니다.
-
-## 문제 보고
-
-[Issues](https://github.com/rainygirl/haiku-rust/issues)에 `uname -a`,
-`rustc -vV`, `cargo -vV`, 설치한 패키지명·버전, 재현 절차와 오류 메시지를
-첨부해주세요. 토큰, 암호, SSH 개인키와 개인 경로 등 민감한 정보는 지워주세요.
