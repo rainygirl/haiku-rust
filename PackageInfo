@@ -1,0 +1,38 @@
+name rust
+version 1.90.0-2
+architecture arm64
+summary "Rust compiler, Cargo and standard library for Haiku ARM64"
+description "Native Rust 1.90.0 toolchain for Haiku ARM64, including rustc, rustdoc, Cargo and the standard library. This is an experimental third-party port."
+packager "rainygirl <rainygirl@gmail.com>"
+vendor "RENKU"
+copyrights {
+    "The Rust Project Developers and contributors"
+}
+licenses {
+    "MIT"
+    "Apache v2"
+}
+provides {
+    rust_bin = 1.90.0
+    rust = 1.90.0
+    cmd:rustc = 1.90.0
+    cmd:rustdoc = 1.90.0
+    cmd:cargo = 1.90.0
+}
+replaces {
+    rust_bin
+}
+requires {
+    haiku
+    haiku_devel
+    gcc
+    binutils
+    gcc_syslibs
+    gcc_syslibs_devel
+    openssl3 >= 3.5.4
+    ca_root_certificates
+    zlib
+}
+urls {
+    "https://www.rust-lang.org/"
+}

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.hpkg
+*.tar.gz
+*.tar.xz
+*.raw
+*.qcow2
+*.log
+target/
+build/
+.DS_Store

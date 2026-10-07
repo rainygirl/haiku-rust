@@ -1,0 +1,39 @@
+change-id = "ignore"
+profile = "compiler"
+
+[build]
+build = "aarch64-unknown-linux-gnu"
+host = ["aarch64-unknown-linux-gnu", "aarch64-unknown-haiku"]
+target = ["aarch64-unknown-linux-gnu", "aarch64-unknown-haiku"]
+docs = false
+extended = true
+tools = ["cargo", "rustdoc"]
+vendor = true
+jobs = 8
+
+[llvm]
+download-ci-llvm = false
+targets = "AArch64"
+experimental-targets = ""
+assertions = false
+link-jobs = 1
+ninja = true
+
+[rust]
+download-rustc = false
+channel = "stable"
+debug = false
+debuginfo-level = 0
+incremental = false
+lto = "off"
+codegen-units = 16
+
+[target.aarch64-unknown-haiku]
+cc = "/opt/haiku/cross-tools-arm64/bin/aarch64-unknown-haiku-gcc"
+cxx = "/opt/haiku/cross-tools-arm64/bin/aarch64-unknown-haiku-g++"
+ar = "/opt/haiku/cross-tools-arm64/bin/aarch64-unknown-haiku-ar"
+ranlib = "/opt/haiku/cross-tools-arm64/bin/aarch64-unknown-haiku-ranlib"
+linker = "/opt/haiku/cross-tools-arm64/bin/aarch64-unknown-haiku-gcc"
+
+[dist]
+compression-formats = ["xz"]
