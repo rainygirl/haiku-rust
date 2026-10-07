@@ -8,16 +8,11 @@ Haiku/RENKU용 비공식 Rust 패키지와 ARM64 포팅·빌드 스크립트입�
 
 **이 패키지는 Rust 프로젝트의 공식 배포판이 아닙니다.** Rust 프로젝트나
 Rust Foundation이 제작·승인·지원하는 패키지가 아닙니다.
-이 패키지의 설치, Haiku/RENKU 포팅, 빌드 및 동작 문제는 Rust 프로젝트나
-Rust Foundation에 문의하거나 upstream 이슈로 등록하지 말고,
-[이 저장소의 Issues](https://github.com/rainygirl/haiku-rust/issues)에 알려주세요.
-유지보수자가 확인한 upstream 문제는 별도로 전달할 수 있습니다.
+Rust Foundation에 문의하지 마세요.
 
 **Unofficial distribution:** This package is not an official Rust release and is
-not endorsed or supported by the Rust Project or the Rust Foundation. Do not
-contact them or open upstream issues for problems with this package. Report
-packaging, installation and Haiku/RENKU port issues to
-[this repository](https://github.com/rainygirl/haiku-rust/issues).
+not endorsed or supported by the Rust Project or the Rust Foundation.
+Do not contact the Rust Foundation.
 
 ## 라이선스
 
