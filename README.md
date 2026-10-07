@@ -74,8 +74,7 @@ pkgman install /boot/home/ca_root_certificates-2025_12_02-1-any.hpkg
 af715a80786abc133d1313f94da4a1a1ffde7242a722c2c29f3eb22241a69efc
 ```
 
-체크섬이 다르면 설치하지 마세요. `curl -k`나 인증서 검증 비활성화로 우회하지
-않습니다. 이 파일은 초기 설치용 고정 버전이며 이후 인증서 업데이트도 유지하세요.
+체크섬이 다르면 설치하지 마세요.
 
 ### ARM64 (`arm64`)
 
